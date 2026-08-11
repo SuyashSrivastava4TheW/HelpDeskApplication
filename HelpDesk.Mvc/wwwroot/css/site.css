@@ -1,0 +1,11 @@
+body {
+  padding-bottom: 60px;
+}
+
+.badge-priority-Low { background-color: #6c757d; }
+.badge-priority-Medium { background-color: #0d6efd; }
+.badge-priority-High { background-color: #dc3545; }
+
+.badge-status-Open { background-color: #198754; }
+.badge-status-In-Progress { background-color: #fd7e14; }
+.badge-status-Closed { background-color: #6c757d; }

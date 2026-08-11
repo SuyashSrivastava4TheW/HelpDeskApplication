@@ -1,0 +1,27 @@
+@model TicketViewModel
+@{
+    ViewData["Title"] = $"Delete Ticket #{Model.Id}";
+}
+
+<h1 class="h3 mb-4 text-danger">Delete Ticket #@Model.Id</h1>
+
+<p>Are you sure you want to delete this ticket? This action cannot be undone.</p>
+
+<dl class="row">
+    <dt class="col-sm-3">Title</dt>
+    <dd class="col-sm-9">@Model.Title</dd>
+
+    <dt class="col-sm-3">Priority</dt>
+    <dd class="col-sm-9">@Model.Priority</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+
+    <dt class="col-sm-3">Raised By</dt>
+    <dd class="col-sm-9">@Model.RaisedBy</dd>
+</dl>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+</form>

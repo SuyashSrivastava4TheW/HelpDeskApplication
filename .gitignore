@@ -1,0 +1,37 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build folders
+bin/
+obj/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# NuGet packages
+packages/
+
+# Publish
+publish/
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Test results
+TestResults/
+
+# EF Core generated database (if any)
+*.mdf
+*.ldf
+
+# ASP.NET
+appsettings.Development.json

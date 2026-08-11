@@ -1,0 +1,81 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 class="mb-4">Dashboard</h1>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-primary shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title text-uppercase">Total Tickets</h6>
+                <p class="display-6 mb-0">@Model.TotalTickets</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-success shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title text-uppercase">Open</h6>
+                <p class="display-6 mb-0">@Model.OpenTickets</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title text-uppercase">In Progress</h6>
+                <p class="display-6 mb-0">@Model.InProgressTickets</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-secondary shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title text-uppercase">Closed</h6>
+                <p class="display-6 mb-0">@Model.ClosedTickets</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h4 mb-0">Recent Tickets</h2>
+    <a asp-controller="Ticket" asp-action="Create" class="btn btn-primary">+ Raise New Ticket</a>
+</div>
+
+@if (!Model.RecentTickets.Any())
+{
+    <p class="text-muted">No tickets yet.</p>
+}
+else
+{
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Raised By</th>
+                <th>Created</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model.RecentTickets)
+            {
+                <tr>
+                    <td>@ticket.Id</td>
+                    <td>@ticket.Title</td>
+                    <td>@ticket.Priority</td>
+                    <td>@ticket.Status</td>
+                    <td>@ticket.RaisedBy</td>
+                    <td>@ticket.CreatedDate.ToLocalTime().ToString("g")</td>
+                    <td><a asp-controller="Ticket" asp-action="Details" asp-route-id="@ticket.Id" class="btn btn-sm btn-outline-primary">View</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

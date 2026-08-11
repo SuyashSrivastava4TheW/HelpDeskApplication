@@ -1,0 +1,53 @@
+@model TicketCreateViewModel
+@{
+    ViewData["Title"] = "Raise New Ticket";
+}
+
+<h1 class="h3 mb-4">Raise New Ticket</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Priority" class="form-label"></label>
+                <select asp-for="Priority" asp-items="Model.PriorityOptions" class="form-select">
+                    <option value="">-- Select Priority --</option>
+                </select>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                <input class="form-control" value="Open" disabled />
+                <div class="form-text">New tickets always start as "Open".</div>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="RaisedBy" class="form-label"></label>
+                <input asp-for="RaisedBy" class="form-control" />
+                <span asp-validation-for="RaisedBy" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Raise Ticket</button>
+            <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

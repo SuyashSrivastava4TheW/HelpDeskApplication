@@ -1,0 +1,55 @@
+@model TicketStatusFilterViewModel
+@{
+    ViewData["Title"] = "Filter Tickets by Status";
+}
+
+<h1 class="h3 mb-4">Filter Tickets by Status</h1>
+
+<form asp-action="FilterByStatus" method="get" class="row g-2 mb-4">
+    <div class="col-auto">
+        <select name="status" class="form-select" asp-items="Model.StatusOptions" asp-for="SelectedStatus">
+            <option value="">-- All Statuses --</option>
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
+
+@if (!string.IsNullOrWhiteSpace(Model.SelectedStatus))
+{
+    if (!Model.Tickets.Any())
+    {
+        <p class="text-muted">No tickets found with status "@Model.SelectedStatus".</p>
+    }
+    else
+    {
+        <table class="table table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Raised By</th>
+                    <th>Created</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ticket in Model.Tickets)
+                {
+                    <tr>
+                        <td>@ticket.Id</td>
+                        <td>@ticket.Title</td>
+                        <td>@ticket.Priority</td>
+                        <td>@ticket.Status</td>
+                        <td>@ticket.RaisedBy</td>
+                        <td>@ticket.CreatedDate.ToLocalTime().ToString("g")</td>
+                        <td><a asp-action="Details" asp-route-id="@ticket.Id" class="btn btn-sm btn-outline-primary">View</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
